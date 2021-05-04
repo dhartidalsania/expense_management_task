@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="description" content="Expense Management">
+  <meta name="author" content="Pattani Hiren">
+  <meta name="keyword" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expense Management</title>
+ 
+    <!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+
+      <!-- plugins -->
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/font-awesome.min.css')}}"/>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/simple-line-icons.css')}}"/>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/animate.min.css')}}"/>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/fullcalendar.min.css')}}"/>
+  <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+  <!-- end: Css -->
+
+  <link rel="shortcut icon" href="{{url_for('static', filename='img/logomi.png')}}">
+  </head>
+
+<body id="mimin" class="dashboard">
+      <!-- start: Header -->
+        <nav class="navbar navbar-default header navbar-fixed-top">
+          <div class="col-md-12 nav-wrapper">
+            <div class="navbar-header" style="width:100%;">
+                <a href="/" class="navbar-brand"> 
+                 <b>{{ name }}</b>
+                </a>
+              
+              <ul class="nav navbar-nav navbar-right user-nav">
+                <li class="user-name"><span>{{ name }}</span></li>
+                  <li class="dropdown avatar-dropdown">
+                   <img src="{{url_for('static',filename = 'img/avatar.jpg')}}" class="img-circle avatar" alt="user name"/>
+                </li>
+                <li><a href="/signout" class="opener-right-menu"><span class="fa fa-sign-out"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      <!-- end: Header -->
+
+      <div class="container-fluid mimin-wrapper">
+  
+          <!-- start:Left Menu -->
+            {% include "menu.html" %}
+          <!-- end: Left Menu -->
+
+
+            <!-- start: Content -->
+            <div id="content">
+               <div class="panel box-shadow-none content-header">
+                  <div class="panel-body">
+                    <div class="col-md-12">
+                        <h3 class="animated fadeInLeft">View Category</h3>
+                        <p class="animated fadeInDown">
+                          Dashboard <span class="fa-angle-right fa"></span> View Category
+                        </p>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-12 top-20 padding-0">
+                <div class="col-md-12">
+                  {% if error %}
+                  <p style="background-color: lightskyblue; color: white; padding: 10px; border-radius: 10px;"><strong>{{error}}</strong>  
+                  {% endif %}
+                  <div class="panel">
+                    <div class="panel-heading"><h3>View Category</h3></div>
+                    <div class="panel-body">
+                      <div class="responsive-table">
+                      <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Sr. No.</th>
+                          <th>Name</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for data in catdata %}
+                        <tr>
+                          <td>{{ loop.index }}</td>
+                          <td>{{ data.cat_name }}</td>
+                          <td>
+                            <button class=" btn btn-circle btn-mn btn-warning" value="edit" onclick="window.location.href='/editcategory/{{ data.id }}'">
+                                <span class="fa fa-pencil-square-o"></span>
+                            </button>
+                            <button class=" btn btn-circle btn-mn btn-danger" value="delete" onclick="window.location.href='/deletecategory/{{ data.id }}'">
+                                <span class="fa fa-trash"></span>
+                            </button>        
+                          </td>
+                        </tr>
+                        {% endfor %}
+                        
+                      </tbody>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+              </div>  
+              </div>
+            </div>
+          <!-- end: content -->
+
+
+          
+      </div>
+
+      <!-- start: Mobile -->
+      {% include "mobile-menu.html" %}
+      <!-- end: Mobile -->
+
+<!-- start: Javascript -->
+    <script src="{{url_for('static', filename = 'js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/jquery.ui.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+
+
+
+<!-- plugins -->
+<script src="{{url_for('static', filename='js/plugins/moment.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/plugins/jquery.datatables.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/plugins/datatables.bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/plugins/jquery.nicescroll.js')}}"></script>
+
+
+<!-- custom -->
+<script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#datatables-example').DataTable();
+  });
+</script>
+<!-- end: Javascript -->
+</body>
+</html>

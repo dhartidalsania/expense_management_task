@@ -1,0 +1,36 @@
+<div id="mimin-mobile" class="reverse">
+        <div class="mimin-mobile-menu-list">
+            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+                <ul class="nav nav-list">
+                    <li class="ripple {% if (request.path == '/dashboard') or (request.path == '/home') or (request.path == '/') or (request.path == '/login') or (request.path == '/loginuser') or (request.path == '/register') or (request.path == '/registeruser') %} active {% endif %}">
+                      <a class="tree-toggle nav-header" href="/dashboard" onclick="window.location.href='/dashboard'">
+                        <span class="fa-home fa"></span>Dashboard
+                      </a>
+                    </li>
+                    <li class="ripple {% if (request.path == '/addcategory') or (request.path == '/editcategory') %} active {% endif %}">
+                      <a class="tree-toggle nav-header" href="/category" onclick="window.location.href='/category'">
+                        <span class="fa-diamond fa"></span>Add Category
+                      </a>
+                    </li>
+                    <li class="ripple {% if (request.path == '/view-category') or (request.path == '/deletecategory') %} active {% endif %}">
+                      <a class="tree-toggle nav-header" href="/category" onclick="window.location.href='/view-category'">
+                        <span class="fa-diamond fa"></span>View Category
+                      </a>
+                    </li>
+                    <li class="ripple {% if (request.path == '/add-expense') or (request.path == '/addexpense') or (request.path == '/editexpense') %} active {% endif %}">
+                      <a class="tree-toggle nav-header" href="/add-expense" onclick="window.location.href='/add-expense'">
+                        <span class="fa-area-chart fa"></span>Add Expense
+                      </a>
+                    </li>
+                    <li class="ripple {% if (request.path == '/view-expense') or (request.path == '/deleteexpense') %} active {% endif %}">
+                      <a class="tree-toggle nav-header" href="/add-expense" onclick="window.location.href='/view-expense'">
+                        <span class="fa-area-chart fa"></span>View Expense
+                      </a>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+      </div>
+      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars"></span>
+      </button>

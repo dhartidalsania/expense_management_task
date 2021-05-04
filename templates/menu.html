@@ -1,0 +1,31 @@
+<div id="left-menu">
+  <div class="sub-left-menu scroll">
+    <ul class="nav nav-list">
+        <li><div class="left-bg"></div></li>
+        <li class="time">
+          <h1 class="animated fadeInLeft">21:00</h1>
+          <p class="animated fadeInRight">Sat,October 1st 2029</p>
+        </li>
+        <li class="ripple {% if (request.path == '/dashboard') or (request.path == '/home') or (request.path == '/') or (request.path == '/login') or (request.path == '/loginuser') or (request.path == '/register') or (request.path == '/registeruser') %} active {% endif %}">
+          <a class="tree-toggle nav-header" href="/dashboard" onclick="window.location.href='/dashboard'"> Dashboard 
+          </a>
+        </li>
+        <li class="ripple {% if (request.path == '/addcategory') or (request.path == '/editcategory') %} active {% endif %}">
+          <a class="tree-toggle nav-header" href="/category" onclick="window.location.href='/category'" > Add Category 
+          </a>
+        </li>
+        <li class="ripple {% if (request.path == '/view-category') or (request.path == '/deletecategory') %} active {% endif %}">
+          <a class="tree-toggle nav-header" href="/view-category" onclick="window.location.href='/view-category'"> View Category
+          </a>
+        </li>
+        <li class="ripple {% if (request.path == '/add-expense') or (request.path == '/addexpense') or (request.path == '/editexpense') %} active {% endif %}">
+          <a class="tree-toggle nav-header" href="/add-expense" onclick="window.location.href='/add-expense'"> Add Expense 
+          </a>
+        </li>
+        <li class="ripple {% if (request.path == '/view-expense') or (request.path == '/deleteexpense') %} active {% endif %}">
+          <a class="tree-toggle nav-header" href="/view-expense" onclick="window.location.href='/view-expense'"> View Expenses
+          </a>
+        </li>
+      </ul>
+    </div>
+</div>

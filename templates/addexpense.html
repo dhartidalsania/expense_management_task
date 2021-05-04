@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Expense Management">
+  <meta name="author" content="Pattani Hiren">
+  <meta name="keyword" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Management</title>
+
+  <!-- start: Css -->
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+
+  <!-- plugins -->
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/font-awesome.min.css')}}"/>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/simple-line-icons.css')}}"/>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/animate.min.css')}}"/>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugins/fullcalendar.min.css')}}"/>
+  <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+  <!-- end: Css -->
+
+  <link rel="shortcut icon" href="{{url_for('static', filename='img/logomi.png')}}">
+</head>
+
+<body id="mimin" class="dashboard">
+  <!-- start: Header -->
+  <nav class="navbar navbar-default header navbar-fixed-top">
+    <div class="col-md-12 nav-wrapper">
+      <div class="navbar-header" style="width:100%;">
+        <a href="/" class="navbar-brand">
+          <b>{{name}}</b>
+        </a>
+        <ul class="nav navbar-nav navbar-right user-nav">
+          <li class="user-name"><span>{{name}}</span></li>
+          <li class="dropdown avatar-dropdown">
+            <img src="{{url_for('static',filename = 'img/avatar.jpg')}}" class="img-circle avatar" alt="user name"/>
+          </li>
+          <li ><a href="/signout" class="opener-right-menu"><span class="fa fa-sign-out"></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- end: Header -->
+
+  <div class="container-fluid mimin-wrapper">
+    <!-- start:Left Menu -->
+    {% include "menu.html" %}
+    <!-- end: Left Menu -->
+    <!-- start: Content -->
+    <div id="content">
+      <div class="panel box-shadow-none content-header">
+        <div class="panel-body">
+          <div class="col-md-12">
+            <h3 class="animated fadeInLeft">Add Expense</h3>
+            <p class="animated fadeInDown">
+              Dashboard <span class="fa-angle-right fa"></span> Add Expense
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="form-element">
+        <div class="col-md-12 padding-0">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            {% if error %}
+            <p style="background-color: lightskyblue; color: white; padding: 10px; border-radius: 10px;"><strong>{{error}}</strong>  
+            {% endif %}
+            <div class="col-md-12 panel">
+              <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+                <div class="col-md-12">
+                  <form class="cmxform" id="signupForm" method="POST" action="/addexpense" autocomplete="off">
+                    <div class="col-md-12">
+
+                      <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                        <select class="form-text" id="validate_category" name="validate_category" required>
+                          <option>Select Category</option>
+                          {% for cat in catdata %}
+                          <option value="{{cat.id}}" {% if expdata %}{% for data in expdata %}{% if cat.id == data.cat_id %} selected {% endif %}{% endfor %}{% endif %} >{{cat.cat_name}}</option>
+                          {% endfor %}
+                        </select>
+                        <span class="bar"></span>
+                        <label>Category</label>
+                      </div>
+
+                      <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                        <input type="text" class="form-text" id="validate_description" name="validate_description" value="{% if expdata %}{% for data in expdata %}{{ data.desc }}{% endfor %}{% endif %}" required>
+                        <span class="bar"></span>
+                        <label>Description</label>
+                      </div>
+
+                      <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                        <input type="text" class="form-text" id="validate_amount" name="validate_amount" value="{% if expdata %}{% for data in expdata %}{{ data.amount|round }}{% endfor %}{% endif %}" required>
+                        <span class="bar"></span>
+                        <label>Amount</label>
+                      </div>
+
+                      <input type="hidden" name="exp_id" value="{% if expdata %}{% for data in expdata %}{{ data.id }}{% endfor %}{% endif %}">
+
+                      <input class="submit btn btn-danger" type="submit" value="Submit">
+
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- end: content -->
+
+
+      </div>
+
+      <!-- start: Mobile -->
+      {% include "mobile-menu.html" %}
+      <!-- end: Mobile -->
+
+<!-- start: Javascript -->
+<script src="{{url_for('static', filename = 'js/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/jquery.ui.min.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+
+
+<!-- plugins -->
+<script src="{{url_for('static', filename = 'js/plugins/moment.min.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/jquery.knob.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/ion.rangeSlider.min.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/bootstrap-material-datetimepicker.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/jquery.nicescroll.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/jquery.mask.min.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/select2.full.min.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/nouislider.min.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/plugins/jquery.validate.min.js')}}"></script>
+
+
+<!-- custom -->
+<script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("#signupForm").validate({
+      errorElement: "em",
+      errorPlacement: function(error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      success: function(label) {
+        $(label.parent("div").removeClass("form-animate-error"));
+      },
+      rules: {
+        validate_firstname: "required",
+        validate_description: "required",
+        validate_amount: "required"
+      },
+      messages: {
+        validate_firstname: "Please Select Expense Category",
+        validate_description: "Please Enter Expense Description",
+        validate_amount: "Please Enter amount"
+      }
+    });
+  });
+
+</script>
+<!-- end: Javascript -->
+</body>
+</html>
